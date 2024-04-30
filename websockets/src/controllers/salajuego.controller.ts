@@ -45,11 +45,11 @@ export class SalaJuegoController {
         const { nombre, estado } = req.body;
         try {
             const idSala = uuidv4();
-            const nuevaSala: SalaJuego = {
+            const nuevaSala = {
                 idSala,
                 nombre,
-                estado
-            };
+                estado:'SIN INICIAR'
+            }; 
             const salaCreada: SalaJuego = await this.salaJuegoRepository.save(nuevaSala);
             return res.status(201).json({ salaJuego: salaCreada });
         } catch (error) {

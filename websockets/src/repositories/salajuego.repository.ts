@@ -16,11 +16,11 @@ export class SalaJuegoRepository {
         return this.repository.find({where: {estado:"SIN INICIAR"}});
     }
 
-    async save(sala: SalaJuego) {
+    async save(sala) {
         return this.repository.save(sala);
     }
 
-    async delete(id: string) {
+   async delete(id: string) {
         return this.repository.delete(id);
     }
 }
