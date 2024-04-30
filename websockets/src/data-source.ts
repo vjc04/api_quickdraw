@@ -5,6 +5,8 @@ import * as dotenv from "dotenv";
 import { Song } from "./entity/Song.entity";
 import { Palabra } from "./entity/Palabra.entity";
 //fhdhdhf
+import {Categoria} from "./entity/Categoria.entity"
+
 
 dotenv.config();
 
