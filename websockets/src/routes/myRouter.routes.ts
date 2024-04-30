@@ -3,10 +3,12 @@ import * as express from "express";
 import { SongController } from "../controllers/song.controller";
 import { PalabraController } from "../controllers/palabra.controller";
 import { CategoriaController } from "../controllers/categoria.controller";
+import { SalaJuegoController } from "../controllers/salajuego.controller";
 const Router = express.Router();
 const songController = new SongController();
 const palabraController = new PalabraController();
 const categoriaController = new CategoriaController();
+const salajuegoController = new SalaJuegoController();
 Router.get(
     "/song",
     songController.getByTitle
@@ -106,6 +108,38 @@ Router.delete(
   categoriaController.delete
 )
 
-  
+//----------------------
+
+//Sala Juego
+Router.get(
+  "/SalaJuego",
+  salajuegoController.getByNombre
+);
+
+Router.get(
+  "/SalaJuego/:idSala",
+  salajuegoController.getByIdSala
+);
+
+Router.get(
+  "/SalasJuego",
+  salajuegoController.getAll
+);
+
+Router.post(
+  "/SalaJuego",
+  salajuegoController.create
+);
+Router.put(
+  "/SalaJuego",
+  salajuegoController.update
+);
+
+
+Router.delete(
+  "/SalaJuego/:idSala",
+  salajuegoController.delete
+)
   
   export { Router as myRouter };
+
