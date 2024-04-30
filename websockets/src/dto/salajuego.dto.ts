@@ -1,6 +1,6 @@
 export class SalaJuegoResponse{
     idSala: string;
     nombre: string;
-    estado: "Sin iniciar" | "En curso" | "Finalizado";
+    estado: "SIN INICIAR" | "EN CURSO" | "FINALIZADO";
   
 }

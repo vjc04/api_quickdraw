@@ -13,7 +13,7 @@ export class SalaJuegoRepository {
     }
 
     async getAll() {
-        return this.repository.find();
+        return this.repository.find({where: {estado:"SIN INICIAR"}});
     }
 
     async save(sala: SalaJuego) {
