@@ -4,6 +4,7 @@ import { DataSource } from "typeorm";
 import * as dotenv from "dotenv";
 import { Song } from "./entity/Song.entity";
 import { Palabra } from "./entity/Palabra.entity";
+import {Categoria} from "./entity/Categoria.entity"
 
 
 dotenv.config();
