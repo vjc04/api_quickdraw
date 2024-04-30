@@ -12,7 +12,7 @@ export class SalaJuego extends BaseEntity {
     idSala: string;
 
     @Column({ nullable: false, type: 'varchar' })
-    nombre: string;
+    nombreSala: string;
 
     @Column({ nullable: false, type: 'varchar' })
     estado: string;

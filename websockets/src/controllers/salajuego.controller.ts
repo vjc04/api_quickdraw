@@ -11,8 +11,8 @@ export class SalaJuegoController {
 
     public getByNombre = async (req: Request, res: Response) => {
         try {
-            const nombre = <string>req.query.nombre;
-            const sala: SalaJuego = await this.salaJuegoRepository.findByNombre(nombre);
+            const nombreSala = <string>req.query.nombreSala;
+            const sala: SalaJuego = await this.salaJuegoRepository.findByNombre(nombreSala);
             return res.status(200).json({ sala });
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -42,12 +42,12 @@ export class SalaJuegoController {
     }
 
     public create = async (req: Request, res: Response) => {
-        const { nombre, estado } = req.body;
+        const { nombreSala, estado } = req.body;
         try {
             const idSala = uuidv4();
             const nuevaSala = {
                 idSala,
-                nombre,
+                nombreSala,
                 estado:'SIN INICIAR'
             }; 
             const salaCreada: SalaJuego = await this.salaJuegoRepository.save(nuevaSala);
@@ -59,13 +59,13 @@ export class SalaJuegoController {
 
     public update = async (req: Request, res: Response) => {
         const { id } = req.params;
-        const { nombre, estado } = req.body;
+        const { nombreSala, estado } = req.body;
         try {
             let salaJuegoToUpdate: SalaJuego = await this.salaJuegoRepository.findById(id);
             if (!salaJuegoToUpdate) {
                 return res.status(404).json({ error: 'Sala de juego no encontrada' });
             }
-            salaJuegoToUpdate.nombre = nombre;
+            salaJuegoToUpdate.nombreSala = nombreSala;
             salaJuegoToUpdate.estado = estado;
             const updatedSala: SalaJuego = await this.salaJuegoRepository.save(salaJuegoToUpdate);
             return res.status(200).json({ salaJuego: updatedSala });

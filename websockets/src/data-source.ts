@@ -4,8 +4,8 @@ import { DataSource } from "typeorm";
 import * as dotenv from "dotenv";
 import { Song } from "./entity/Song.entity";
 import { Palabra } from "./entity/Palabra.entity";
-//fhdhdhf
-import {Categoria} from "./entity/Categoria.entity"
+import { Categoria } from "./entity/Categoria.entity"
+import { SalaJuego } from "./entity/SalaJuego.entity";
 
 
 dotenv.config();
@@ -23,7 +23,7 @@ export const AppDataSource = new DataSource({
   synchronize: false,
 //logging logs sql command on the treminal
   logging:  false,
-  entities: [Song, Palabra],
+  entities: [Song, Palabra, Categoria, SalaJuego],
   migrations: [__dirname + "/migration/*.ts"],
   subscribers: [],
 });

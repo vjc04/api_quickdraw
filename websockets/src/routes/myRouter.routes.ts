@@ -79,32 +79,32 @@ Router.get(
 //  -----------------------------------------
 
 Router.get(
-  "/Categoria",
+  "/categoria",
   categoriaController.getByNombre
 );
 
 Router.get(
-  "/Categoria/:id_Categoria",
+  "/categoria/:id_categoria",
   categoriaController.getByIdCategoria
 );
 
 Router.get(
-  "/Categorias",
+  "/categorias",
   categoriaController.getAll
 );
 
 Router.post(
-  "/Categoria",
+  "/categoria",
   categoriaController.save
 );
 
 Router.put(
-  "/Categoria",
+  "/categoria",
   categoriaController.update
 )
 
 Router.delete(
-  "/Categoria/:id_Categoria",
+  "/categoria/:id_categoria",
   categoriaController.delete
 )
 
@@ -112,32 +112,32 @@ Router.delete(
 
 //Sala Juego
 Router.get(
-  "/SalaJuego",
+  "/salajuego",
   salajuegoController.getByNombre
 );
 
 Router.get(
-  "/SalaJuego/:idSala",
+  "/salajuego/:idSala",
   salajuegoController.getByIdSala
 );
 
 Router.get(
-  "/SalasJuego",
+  "/salasjuego",
   salajuegoController.getAll
 );
 
 Router.post(
-  "/SalaJuego",
+  "/salajuego",
   salajuegoController.create
 );
 Router.put(
-  "/SalaJuego",
+  "/salajuego",
   salajuegoController.update
 );
 
 
 Router.delete(
-  "/SalaJuego/:idSala",
+  "/salajuego/:idSala",
   salajuegoController.delete
 )
   

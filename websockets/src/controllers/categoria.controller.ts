@@ -12,10 +12,10 @@ export class CategoriaController{
         try {
             const Nombre = <string>req.query.Nombre;
             console.log(Nombre);
-            const palabra: CategoriaResponse = await this.CategoriaRepository.findByNombre(Nombre);
+            const categoria: CategoriaResponse = await this.CategoriaRepository.findByNombre(Nombre);
             console.log('response del '+ Nombre);
             return res.status(200).json({
-                Nombre,
+                categoria,
               });
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -53,9 +53,9 @@ export class CategoriaController{
         const body = req.body;
         try {
             
-            const id_Categoria = uuidv4();
-            body['id_Categoria']= id_Categoria;
-            console.log('este es el body2 de la Categoria'+ body)
+            const id_categoria = uuidv4();
+            body['id_categoria']= id_categoria;
+            console.log('este es el body3 de la Categoria'+ body)
             const result: Categoria = await this.CategoriaRepository.save(body);
             console.log('este es el response de la Categoria'+ result)
             return res.status(200).json(result);
@@ -67,8 +67,8 @@ export class CategoriaController{
     public update = async (req: Request, res: Response) => {
         const body = req.body;
         try {
-            const id_Categoria = body.id;
-            let categoriaToUpdate: Categoria = await this.CategoriaRepository.findById(id_Categoria);
+            const id_categoria = body.id;
+            let categoriaToUpdate: Categoria = await this.CategoriaRepository.findById(id_categoria);
             categoriaToUpdate = {
                 ...body
             } 
@@ -80,9 +80,9 @@ export class CategoriaController{
     }
 
     public delete = async (req: Request, res: Response) => {
-        const {id_Categoria} = req.params;
+        const {id_categoria} = req.params;
         try {
-            await this.CategoriaRepository.delete(id_Categoria);
+            await this.CategoriaRepository.delete(id_categoria);
             res.status(200).json({message: 'Deleted'});
             
         } catch (error) {

@@ -19,8 +19,8 @@ export class CategoriaRepository{
         return this.repository.find();
     }
 
-    async save(Nombre: Categoria){
-        return this.repository.save(Nombre);
+    async save(categoria: Categoria){
+        return this.repository.save(categoria);
     }
    
     async delete (id_categoria: string){

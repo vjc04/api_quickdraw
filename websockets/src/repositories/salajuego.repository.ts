@@ -4,12 +4,12 @@ import { AppDataSource } from "../data-source";
 export class SalaJuegoRepository {
     private repository = AppDataSource.getRepository(SalaJuego);
 
-    async findByNombre(nombre: string) {
-        return this.repository.findOne({ where: { nombre } });
+    async findByNombre(nombreSala: string) {
+        return this.repository.findOne({ where: { nombreSala } });
     }
 
-    async findById(id: string) {
-        return this.repository.findOne({ where: { idSala: id } });
+    async findById(idSala: string) {
+        return this.repository.findOneBy({idSala});
     }
 
     async getAll() {
@@ -20,7 +20,7 @@ export class SalaJuegoRepository {
         return this.repository.save(sala);
     }
 
-   async delete(id: string) {
-        return this.repository.delete(id);
+   async delete(idSala: string) {
+        return this.repository.delete(idSala);
     }
 }
