@@ -75,9 +75,9 @@ export class SalaJuegoController {
     }
 
     public delete = async (req: Request, res: Response) => {
-        const { id } = req.params;
+        const { idSala } = req.params;
         try {
-            await this.salaJuegoRepository.delete(id);
+            await this.salaJuegoRepository.delete(idSala);
             return res.status(200).json({ message: 'Sala de juego eliminada' });
         } catch (error) {
             return res.status(400).json({ error: error.message });
