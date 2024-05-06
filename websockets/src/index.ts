@@ -8,6 +8,35 @@ import * as swaggerUi from 'swagger-ui-express';
 import * as swaggerSpec from './swagger'
 const cors = require('cors');
 dotenv.config();
+export const MAX_PLAYERS: number = 3;
+
+export interface Player {
+  username: string,
+  score: number,
+  points_gained: number,
+  ws: any
+}
+export interface Room {
+  roomName: string,
+  current_round: number,
+  painter_index: number,
+  players: Player[],
+  status: string, 
+  current_turn: CurrentTurn
+}
+export interface CurrentTurn {
+  word: string,
+  countdown: number,
+  guessed: {
+    username: string,
+    points_gained: number
+  }[]
+}
+export interface Game {
+  rooms: Room[]
+}
+
+
 
 const { PORT = 3000 } = process.env;
 var express = require('express');
