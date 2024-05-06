@@ -6,11 +6,11 @@ import {
   } from "typeorm";
   
   @Entity({ name: "palabraporcategoria" })
-  export class PalabraPorCategoria extends BaseEntity {
+  export class PalabrasPorCategoria extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     idPalabra: string;
   
-    @Column({ nullable: false, type:'varchar' })
+    @PrimaryGeneratedColumn("uuid")
     idCategoria: string;
   
   }
