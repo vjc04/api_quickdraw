@@ -80,9 +80,9 @@ export class PalabraController{
     }
 
     public delete = async (req: Request, res: Response) => {
-        const {id_categoria} = req.params;
+        const {id} = req.params;
         try {
-            await this.palabraRepository.delete(id_categoria);
+            await this.palabraRepository.delete(id);
             res.status(200).json({message: 'Deleted'});
             
         } catch (error) {
