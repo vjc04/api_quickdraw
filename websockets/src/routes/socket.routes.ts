@@ -1,5 +1,6 @@
 import { SongRepository } from "../repositories/song.repository";
 import { Room, Player, Game, MAX_PLAYERS, CurrentTurn, MAX_ROUNDS} from '../index'
+import { PalabraRepository } from "../repositories/palabra.repository";
 const express = require('express');
 const router = express.Router();
 module.exports = (expressWs) => {
@@ -14,6 +15,7 @@ module.exports = (expressWs) => {
     //const rooms = {};
 
     router.ws('/room/:roomName', (ws, req) => {
+        
         const roomName = req.params.roomName;
         const userName = req.headers.username;
         const existRoom = rooms.find((room) => room.roomName === roomName);
@@ -197,7 +199,7 @@ module.exports = (expressWs) => {
 
                         if (room.players.length > 1 ) {
                             room.players.forEach(client => {
-                                if (client.ws != ws && client.ws.readyState === ws.OPEN) {
+                                if (client.ws.readyState === ws.OPEN) {
                                   console.log(ws.OPEN);
                                   client.ws.send(` Comienza la ronda: ` + room.current_round);
                              }
@@ -210,15 +212,45 @@ module.exports = (expressWs) => {
                     }
                     //console.log('la ronda es: '+ room.current_round);
                 
+                    //Finalize game
                     if(room.current_round >= MAX_ROUNDS && room.painter_index >= MAX_PLAYERS){
                         if (room.players.length > 0 ) {
                             room.players.forEach(client => {
                                 if (client.ws != ws && client.ws.readyState === ws.OPEN) {
                                   console.log(client.username);
                                   client.ws.send(` El juego ha terminado `);
+                                  
                              }
                            })
                         }
+                        // Function to descent order
+                        room.players.sort((a, b) => {
+                            if (a.score > b.score) {
+                                return -1;
+                            }
+                            if (a.score < b.score) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+
+                       
+                        //Print score table in descent order, the first is the winner
+                        let orderPlayers = room.players;
+                        orderPlayers.forEach(orderplayer =>  {
+                            console.log('El jugador '+ orderplayer.username +' logró '+ orderplayer.score);
+                            room.players.forEach(player => {
+                                if ( player.ws.readyState === ws.OPEN) {
+                                    player.ws.send(` El jugador ${orderplayer.username}  logró  ${orderplayer.score}`);
+                                }
+                           })    
+                        });      
+                        
+                        //Print winner
+                        room.players.forEach(client => {
+                            client.ws.send(` El ganador es: ${room.players[0].username}  con  ${room.players[0].score}  puntos`);
+            
+                        });
                     }
 
                 }
