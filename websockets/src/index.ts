@@ -9,6 +9,7 @@ import * as swaggerSpec from './swagger'
 const cors = require('cors');
 dotenv.config();
 export const MAX_PLAYERS: number = 3;
+export const MAX_ROUNDS: number = 2;
 
 export interface Player {
   username: string,
@@ -35,7 +36,6 @@ export interface CurrentTurn {
 export interface Game {
   rooms: Room[]
 }
-
 
 
 const { PORT = 3000 } = process.env;
