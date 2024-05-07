@@ -10,7 +10,7 @@ import {
     @PrimaryGeneratedColumn("uuid")
     idPalabra: string;
   
-    @PrimaryGeneratedColumn("uuid")
+    @Column ({ nullable: false, type: 'varchar' })
     idCategoria: string;
   
   }
