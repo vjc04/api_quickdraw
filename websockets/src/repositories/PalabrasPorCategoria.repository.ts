@@ -1,5 +1,5 @@
 
-import { PalabrasPorCategoria } from "../entity/PalabrasPorCategoria.entity";
+/*import { PalabrasPorCategoria } from "../entity/PalabrasPorCategoria.entity";
 import { AppDataSource } from "../data-source";
 
 export class PalabraPorCategoriaRepository{
@@ -26,4 +26,4 @@ export class PalabraPorCategoriaRepository{
     async delete (idPalabra: string){
         return this.repository.delete(idPalabra);
     }
-}
+}*/

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+/*import { Request, Response } from "express";
 import { PalabrasPorCategoriaResponse } from "../dto/palabrasporcategoria.dto";
 import { PalabraPorCategoriaRepository } from "../repositories/PalabrasPorCategoria.repository";
 import { PalabrasPorCategoria } from "../entity/PalabrasPorCategoria.entity";
@@ -90,4 +90,4 @@ export class PalabraPorCategoriaController{
         }
     }
 
-}
+}*/
