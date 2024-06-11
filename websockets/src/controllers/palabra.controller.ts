@@ -38,7 +38,7 @@ export class PalabraController{
         }
     }
 
-    public getAll = async (req: Request, res: Response) => {
+    /*public getAll = async (req: Request, res: Response) => {
         try {
             console.log('estas son las palabras inicio');
             const palabras: Palabra[] = await this.palabraRepository.getAll();
@@ -47,6 +47,10 @@ export class PalabraController{
         } catch (error) {
              res.status(400).json({ error: error.message });
        }
+    }*/
+    public getAll = async (req: Request, res: Response) => {
+        const palabras = await Palabra.find()
+        return res.json(palabras)
     }
 
     public save = async (req: Request, res: Response) => {
@@ -55,6 +59,7 @@ export class PalabraController{
             
             const id = uuidv4();
             body['id']= id;
+            //body['categoriaid']= categoriaid;
             console.log('este es el body2 de la palabra'+ body)
             const result: Palabra = await this.palabraRepository.save(body);
             console.log('este es el response de la palabra'+ result)

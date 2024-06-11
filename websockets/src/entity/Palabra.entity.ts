@@ -9,13 +9,17 @@ import { Categoria } from "./Categoria.entity";
   
   @Entity({ name: "palabras" })
   export class Palabra extends BaseEntity {
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn(("uuid"))
     id: string;
   
     @Column({ nullable: false, type:'varchar' })
     texto: string;
 
     @ManyToOne(()=> Categoria, (categoria) => categoria.palabras)
-    categoria: Categoria[];
+    categoria: Categoria;
 
+    @Column({type: 'uuid'})
+    categoriaIdCategoria: string;
+
+   
   }

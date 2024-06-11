@@ -2,8 +2,11 @@ import { Request, Response } from "express";
 import { CategoriaResponse } from "../dto/categoria.dto";
 import { CategoriaRepository } from "../repositories/categoria.repository";
 import { Categoria } from "../entity/Categoria.entity";
+import { AppDataSource } from "../data-source";
+import { Palabra } from "../entity/Palabra.entity";
 
 import { v4 as uuidv4 } from 'uuid';
+import { DataSource } from "typeorm";
 
 export class CategoriaController{
     
@@ -53,16 +56,36 @@ export class CategoriaController{
         const body = req.body;
         try {
             
-            const id_categoria = uuidv4();
-            body['id_categoria']= id_categoria;
-            console.log('este es el body3 de la Categoria'+ body)
-            const result: Categoria = await this.CategoriaRepository.save(body);
+        
+            const categoriax : Categoria = await this.CategoriaRepository.findByNombre(body.nombre);
+            if(categoriax != null){
+               
+               
+                return res.status(404).json({ error: 'Categoria already exists'});
+            }
+
+            const categoria = new Categoria();
+            categoria.id_categoria = uuidv4();
+            categoria.Nombre= body.nombre;
+            
+            if(body.palabra != null){
+                const palabra = new Palabra();
+                palabra.id= uuidv4();
+                palabra.texto= body.palabra;
+                await AppDataSource.manager.save(palabra);
+                categoria.palabras= [palabra];
+            }
+
+            const result: Categoria = await AppDataSource.manager.save(categoria);
+         
             console.log('este es el response de la Categoria'+ result)
             return res.status(200).json(result);
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
     }
+
+    
 
     public update = async (req: Request, res: Response) => {
         const body = req.body;
