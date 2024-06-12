@@ -1,11 +1,18 @@
 import { SongRepository } from "../repositories/song.repository";
 import { Room, Player, Game, MAX_PLAYERS, CurrentTurn, MAX_ROUNDS} from '../index'
+import { AppDataSource } from "../data-source";
+import { Palabra } from "../entity/Palabra.entity";
 import { PalabraRepository } from "../repositories/palabra.repository";
+import { CategoriaRepository } from "../repositories/categoria.repository";
+import { Categoria } from "../entity/Categoria.entity";
+
+
 const express = require('express');
 const router = express.Router();
-module.exports = (expressWs) => {
+module.exports = (expressWs) =>  {
     
     const songRepository = new SongRepository();
+    const categoriaRepository = new CategoriaRepository();
     expressWs.applyTo(router);
 
     //create game
@@ -14,7 +21,7 @@ module.exports = (expressWs) => {
     let rooms = game.rooms;
     //const rooms = {};
 
-    router.ws('/room/:roomName', (ws, req) => {
+    router.ws('/room/:roomName', async (ws, req) =>  {
         
         const roomName = req.params.roomName;
         const userName = req.headers.username;
@@ -101,8 +108,8 @@ module.exports = (expressWs) => {
 
             });
             //La palabra se debe traer de la base de datos
-            room.current_turn.word = 'vaca';
-
+            
+            room.current_turn.word= await categoriaRepository.getPalabra(roomName);;
             room.players[room.painter_index].ws.send(`tu tienes el turno con la palabra: `+ room.current_turn.word);
 
             
@@ -169,7 +176,7 @@ module.exports = (expressWs) => {
                         if(room.painter_index <= MAX_PLAYERS-1){
 
                             
-                            room.current_turn.word = 'vaca';
+                            room.current_turn.word = await categoriaRepository.getPalabra(roomName);
                             //console.log('el turno es: '+  room.painter_index);
 
                             //Send turn to next player
@@ -188,7 +195,7 @@ module.exports = (expressWs) => {
                         //Reset next turn
                         room.painter_index = 0;
                         //Get word from database
-                        room.current_turn.word = 'vaca';
+                        room.current_turn.word = await categoriaRepository.getPalabra(roomName);
                         //Reset countdown
                         room.current_turn.countdown = 10;
                         //Delete guessed array

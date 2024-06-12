@@ -4,9 +4,10 @@ import { CategoriaRepository } from "../repositories/categoria.repository";
 import { Categoria } from "../entity/Categoria.entity";
 import { AppDataSource } from "../data-source";
 import { Palabra } from "../entity/Palabra.entity";
+import { PalabraRepository } from "../repositories/palabra.repository";
 
 import { v4 as uuidv4 } from 'uuid';
-import { DataSource } from "typeorm";
+import { DataSource, getRepository } from "typeorm";
 
 export class CategoriaController{
     
@@ -20,6 +21,19 @@ export class CategoriaController{
             return res.status(200).json({
                 categoria,
               });
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    };
+
+    public getPalabra = async (req: Request, res: Response) => {
+    
+        
+        try {
+            const Nombre = <string>req.query.Nombre;
+            
+            const palabra= await this.CategoriaRepository.getPalabra(Nombre);
+            return res.status(200).json(palabra);
         } catch (error) {
             res.status(400).json({ error: error.message });
         }

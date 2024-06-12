@@ -89,6 +89,11 @@ Router.get(
 );
 
 Router.get(
+  "/categoriapalabra",
+  categoriaController.getPalabra
+);
+
+Router.get(
   "/categorias",
   categoriaController.getAll
 );

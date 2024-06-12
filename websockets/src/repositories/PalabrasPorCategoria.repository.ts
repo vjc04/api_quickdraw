@@ -7,12 +7,12 @@ export class PalabraPorCategoriaRepository{
 
    
     async findByIdPalabra(idPalabra: string) {
-        return this.repository.findOneBy({ idPalabra });
+        return this.repository.find({ where:{ palabra{id: idPalabra }}});
     }
 
 
     async findByIdCategoria(idCategoria: string) {
-        return this.repository.findOneBy({ idCategoria });
+        return this.repository.find({ where:{ categoria id: idPalabra }}});
     }
 
     async getAll() {
